@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      var map;
+      function initMap() {
+        const glasgow = {lat:55.8690744, lng:-4.4372416};
+        const edinburgh = {lat:55.944982, lng:-3.2024382 };
+        const dufftown = {lat:57.444948, lng:-3.0658807};
+        const portree = {lat:57.4046355, lng:-6.1998715};
+        const callander = {lat:56.245035, lng:-4.2240483};
+        var route = [ glasgow, edinburgh, dufftown, portree, callander, glasgow ];
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 56.5, lng: -4.5},
+          zoom: 8
+        });
+      
+        for (point of route) {
+          new google.maps.Marker({
+            position: point,
+            map: map,
+            title: 'Destination'
+          }); 
+        }
+        const flightPath = new google.maps.Polyline({
+          path: route,
+          geodesic: true,
+          strokeColor: '#000000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+        flightPath.setMap(map);
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFoqEme4NOFry48QGvRRgN8Qnb5fJFro&callback=initMap"
+        async defer></script>
+  </body>
+</html>

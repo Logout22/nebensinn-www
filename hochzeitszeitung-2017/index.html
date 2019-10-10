@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+
+      var map;
+      function initMap() {
+        var reichenbachstr = {lat:51.0332, lng:13.73836 };
+        var networkParticipants = [{lat:51.0428394,lng:13.6666381},{lat:51.009904,lng:13.7992633},{lat:51.0283563,lng:13.7215313},{lat:51.0312254,lng:13.7312281},{lat:51.024514,lng:13.732997},{lat:51.038149,lng: 13.718100}];
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: reichenbachstr,
+          zoom: 14
+        });
+      
+        var marker = new google.maps.Marker({
+          position: reichenbachstr,
+          map: map,
+          title: 'Reichenbachstr'
+        }); 
+      
+        networkParticipants.forEach(function(part) {
+          var currentMarker = new google.maps.Marker({
+            position: part,
+            map: map,
+            title: 'Outpost'
+          }); 
+          var flightPath = new google.maps.Polyline({
+            path: [reichenbachstr, part],
+            geodesic: true,
+            strokeColor: '#000000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
+        
+          flightPath.setMap(map);
+        });
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt0aFOWC2fP-S7ON48I7Z5AOKaVTl3lhw&callback=initMap"
+        async defer></script>
+  </body>
+</html>
