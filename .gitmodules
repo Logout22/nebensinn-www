@@ -1,0 +1,3 @@
+[submodule "linguafranka"]
+	path = linguafranka
+	url = https://github.com/Logout22/linguafranka.git
